@@ -5,26 +5,23 @@ class User < ApplicationRecord
   DIGEST = OpenSSL::Digest::SHA256.new
   VALID_USERNAME_REGEXP = /\A\w+\z/.freeze
 
+  attr_accessor :password
+
+  before_validation :username_downcase
+  before_save :encrypt_password
+
   has_many :questions, dependent: :destroy
 
   # email, username presence
   validates :email, :username, presence: true
   # email, username uniqueness
   validates :email, :username, uniqueness: true
-  # max length of username
-  validates :username, format: { with: VALID_USERNAME_REGEXP, message: 'Only: a-z, A-Z, 0-9, _' },
-            length: {maximum: 40}
-
   # email format validation
-  validates :email, format: { with: URI::MailTo::EMAIL_REGEXP, message: "is not an email" }
+  validates :email, format: {with: URI::MailTo::EMAIL_REGEXP}
 
-  attr_accessor :password
-
-  validates_presence_of :password, on: :create, message: "can't be blank"
-  validates_confirmation_of :password
-
-  before_validation :username_downcase
-  before_save :encrypt_password
+  validates :password, confirmation: true, presence: true, on: :create
+  # max length of username
+  validates :username, format: {with: VALID_USERNAME_REGEXP}, length: {maximum: 40}
 
   def self.authenticate(email, password)
     user = find_by(email: email)
