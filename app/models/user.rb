@@ -3,15 +3,23 @@ require 'openssl'
 class User < ApplicationRecord
   ITERATIONS = 20000.freeze
   DIGEST = OpenSSL::Digest::SHA256.new
+  VALID_USERNAME_REGEXP = /\A\w+\z/.freeze
 
   has_many :questions
 
+  # email, username presence
   validates :email, :username, presence: true
+  # email, username uniqueness
   validates :email, :username, uniqueness: true
+  # max length of username
+  validates :username, length: {maximum: 40, message: '40 symbols max'}, format: {with: VALID_USERNAME_REGEXP,
+                                                                                  message: 'Only: a-z, A-Z, 0-9, _'}
+  # email format validation
+  validates :email, format: {with: URI::MailTo::EMAIL_REGEXP, message: "is not an email"}
 
   attr_accessor :password
 
-  validates_presence_of :password, on: :create
+  validates_presence_of :password, on: :create, message: "can't be blank"
   validates_confirmation_of :password
 
   before_save :encrypt_password
