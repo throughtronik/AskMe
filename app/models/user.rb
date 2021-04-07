@@ -5,7 +5,7 @@ class User < ApplicationRecord
   DIGEST = OpenSSL::Digest::SHA256.new
   VALID_USERNAME_REGEXP = /\A\w+\z/.freeze
 
-  has_many :questions
+  has_many :questions, dependent: :destroy
 
   # email, username presence
   validates :email, :username, presence: true
