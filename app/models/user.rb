@@ -17,11 +17,11 @@ class User < ApplicationRecord
   # email, username uniqueness
   validates :email, :username, uniqueness: true
   # email format validation
-  validates :email, format: {with: URI::MailTo::EMAIL_REGEXP}
+  validates :email, format: { with: URI::MailTo::EMAIL_REGEXP }
 
   validates :password, confirmation: true, presence: true, on: :create
   # max length of username
-  validates :username, format: {with: VALID_USERNAME_REGEXP}, length: {maximum: 40}
+  validates :username, format: { with: VALID_USERNAME_REGEXP }, length: { maximum: 40 }
 
   def self.authenticate(email, password)
     user = find_by(email: email)
@@ -56,6 +56,8 @@ class User < ApplicationRecord
   end
 
   def username_downcase
-    username.downcase!
+    if username.present?
+      username.downcase!
+    end
   end
 end
