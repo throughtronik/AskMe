@@ -12,21 +12,19 @@ class User < ApplicationRecord
   # email, username uniqueness
   validates :email, :username, uniqueness: true
   # max length of username
-  validates :username, length: {maximum: 40, message: '40 symbols max'}, format: {with: VALID_USERNAME_REGEXP,
-                                                                                  message: 'Only: a-z, A-Z, 0-9, _'}
+  validates :username, format: { with: VALID_USERNAME_REGEXP, message: 'Only: a-z, A-Z, 0-9, _' },
+            length: {maximum: 40}
+
   # email format validation
-  validates :email, format: {with: URI::MailTo::EMAIL_REGEXP, message: "is not an email"}
+  validates :email, format: { with: URI::MailTo::EMAIL_REGEXP, message: "is not an email" }
 
   attr_accessor :password
 
   validates_presence_of :password, on: :create, message: "can't be blank"
   validates_confirmation_of :password
 
+  before_validation :username_downcase
   before_save :encrypt_password
-
-  def self.hash_to_string(password_hash)
-    password_hash.unpack('H*')[0]
-  end
 
   def self.authenticate(email, password)
     user = find_by(email: email)
@@ -44,6 +42,10 @@ class User < ApplicationRecord
     nil
   end
 
+  def self.hash_to_string(password_hash)
+    password_hash.unpack('H*')[0]
+  end
+
   private
 
   def encrypt_password
@@ -54,5 +56,9 @@ class User < ApplicationRecord
         OpenSSL::PKCS5.pbkdf2_hmac(password, self.password_salt, ITERATIONS, DIGEST.length, DIGEST)
       )
     end
+  end
+
+  def username_downcase
+    username.downcase!
   end
 end
