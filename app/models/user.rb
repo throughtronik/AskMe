@@ -5,7 +5,7 @@ class User < ApplicationRecord
   DIGEST = OpenSSL::Digest::SHA256.new
   VALID_USERNAME_REGEXP = /\A\w+\z/.freeze
 
-  before_validation :username_downcase
+  before_validation :username_downcase, :email_downcase
 
   before_save :encrypt_password
 
@@ -22,7 +22,7 @@ class User < ApplicationRecord
   validates :username, format: { with: VALID_USERNAME_REGEXP }, length: { maximum: 40 }
 
   def self.authenticate(email, password)
-    user = find_by(email: email)
+    user = find_by(email: email&.downcase)
 
     return nil unless user.present?
 
@@ -50,6 +50,12 @@ class User < ApplicationRecord
       self.password_hash = User.hash_to_string(
         OpenSSL::PKCS5.pbkdf2_hmac(password, self.password_salt, ITERATIONS, DIGEST.length, DIGEST)
       )
+    end
+  end
+
+  def email_downcase
+    if email.present?
+      email.downcase!
     end
   end
 
