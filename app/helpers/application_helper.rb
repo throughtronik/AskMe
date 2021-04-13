@@ -1,10 +1,9 @@
 module ApplicationHelper
   def user_avatar(user)
+    user.avatar_url.presence || asset_pack_path('media/images/user_avatar.jpg')
+  end
 
-    if user.avatar_url.present?
-      user.avatar_url
-    else
-      asset_path 'user_avatar.jpg'
-    end
+  def incline
+    
   end
 end
