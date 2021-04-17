@@ -1,12 +1,21 @@
 body {
-  font-family: "Trebuchet MS", sans-serif;
-
+  font-family: "Trebuchet MS", "Open Sans", sans-serif !important;
   font-size: 16px;
 }
 
+a {
+  text-decoration: none;
+}
+
 .title-large {
-  font-size: 48px;
+  font-size: 42px;
   margin-bottom: 18px;
+}
+
+.title-medium {
+  font-size: 30px;
+  font-weight: bold;
+  margin-bottom: 12px;
 }
 
 .title-small {
@@ -14,26 +23,18 @@ body {
   margin-bottom: 6px;
 }
 
-.title-medium {
-  font-size: 32px;
-  font-weight: bold;
-  margin: 12px;
-}
-
 .text-lead {
-  font-size: 16px;
-  font-weight: normal;
-  line-height: 30px;
+  font-size: 20px;
+  line-height: 28px;
 }
 
 .text-medium {
-  font-size: 14px;
+  font-size: 16px;
   line-height: 24px;
-  color: #666;
 }
 
 .text-small {
-  font-size: 12px;
+  font-size: 14px;
   font-style: italic;
   line-height: 100%;
   padding-bottom: 10px;
@@ -42,3 +43,4 @@ body {
 .text-center {
   text-align: center;
 }
+
