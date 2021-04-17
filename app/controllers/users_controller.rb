@@ -1,38 +1,48 @@
 class UsersController < ApplicationController
+
+  before_action :load_user, except: [:create, :index, :new]
+
+  def create
+    if @user.save
+      redirect_to root_url, notice: 'Пользователь успешно зарегистрирован'
+    else
+      render :new
+    end
+  end
+
   def index
-    @users = [
-      User.new(
-        id: 1,
-        name: 'Vadim',
-        username: 'installero',
-        avatar_url: 'https://www.bikkinpanda.com/wp-content/uploads/2018/04/gravatar-1-810x450.png'
-      ),
-      User.new(
-        id: 2,
-        name: 'Misha',
-        username: 'aristofun'
-      )
-    ]
+    @users = User.all
   end
 
   def new
+    @user = User.new
   end
 
   def edit
   end
 
+
   def show
-    @user = User.new(
-      name: 'Vadim',
-      username: 'installero',
-      avatar_url: 'https://www.bikkinpanda.com/wp-content/uploads/2018/04/gravatar-1-810x450.png'
-    )
+    @questions = @user.questions.order(created_at: :desc)
 
-     @questions = [
-      Question.new(text: 'How r u?', created_at: Date.parse('27.03.2016')),
-      Question.new(text: 'What is the sense of life?', created_at: Date.parse('27.03.2016'))
-    ]
+    @new_question = @user.questions.build
+  end
 
-    @new_question = Question.new
+  def update
+    if @user.update(user_params)
+      redirect_to user_path(@user), notice: 'Данные обновлены'
+    else
+      render :edit
+    end
+  end
+
+  private
+
+  def load_user
+    @user ||= User.find params[:id]
+  end
+
+  def user_params
+    params.require(:user).permit(:email, :password, :password_confirmation, :name, :username, :avatar_url)
   end
 end
