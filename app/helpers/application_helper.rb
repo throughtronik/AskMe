@@ -4,15 +4,15 @@ module ApplicationHelper
   end
 
   def incline(num, single, few, a_lot_of)
-    case num % 100
-    when 11..14 then a_lot_of
-    end
-
-    case num % 10
-    when 0, *(5..9) then a_lot_of
-    when 2..4 then few
-    else single
-    end
+      if (11..14).include?(num % 100)
+        return a_lot_of
+      elsif (2..4).include?(num % 10)
+        return few
+      elsif (5..9).include?(num % 10) || num % 10 == 0
+        return a_lot_of
+      else
+        return single
+      end
   end
 
   def fa_icon(icon_class)
