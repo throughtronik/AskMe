@@ -31,6 +31,8 @@ class UsersController < ApplicationController
 
 
   def show
+    @bg_color = @user.bg_color unless @user.bg_color.blank?
+
     @questions = @user.questions.order(created_at: :desc)
 
     @new_question = @user.questions.build
@@ -59,6 +61,6 @@ class UsersController < ApplicationController
   end
 
   def user_params
-    params.require(:user).permit(:email, :password, :password_confirmation, :name, :username, :avatar_url)
+    params.require(:user).permit(:bg_color, :email, :password, :password_confirmation, :name, :username, :avatar_url)
   end
 end
