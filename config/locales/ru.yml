@@ -1,0 +1,19 @@
+ru:
+  question:
+    zero: вопросов
+    one: вопрос
+    few:  вопроса
+    many: вопросов
+    other: вопросы
+  answer:
+    zero: ответов
+    one: ответ
+    few: ответа
+    many: ответов
+    other: ответы
+  wo_answer:
+    zero: без ответа
+    one: без ответа
+    few: без ответа
+    many: без ответа
+    other: без ответа
