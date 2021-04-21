@@ -31,7 +31,7 @@ class UsersController < ApplicationController
 
 
   def show
-    @bg_color = @user.bg_color unless @user.bg_color.blank?
+    @bg_color = @user.bg_color
 
     @questions = @user.questions.order(created_at: :desc)
 

@@ -4,7 +4,7 @@ class User < ApplicationRecord
   ITERATIONS = 20000.freeze
   DIGEST = OpenSSL::Digest::SHA256.new
   VALID_USERNAME_REGEXP = /\A\w+\z/.freeze
-  VALID_BG_COLOR_REGEXP = /#([a-f0-9]){6}/.freeze
+  VALID_BG_COLOR_REGEXP = /\A#([a-f0-9]){6}\z/.freeze
 
   before_validation :username_downcase, :email_downcase
 
@@ -14,7 +14,7 @@ class User < ApplicationRecord
 
   attr_accessor :password
 
-  validates :bg_color, allow_blank: true, format: {with: VALID_BG_COLOR_REGEXP}
+  validates :bg_color, allow_blank: true, format: { with: VALID_BG_COLOR_REGEXP }
 
   validates :email, :username, presence: true, uniqueness: true
 
