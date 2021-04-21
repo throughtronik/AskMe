@@ -5,7 +5,7 @@
       <% if @user.errors.any? %>
         <div class="form-errors">
           <ul>
-            <% @user.errors.full_messages.each do | message |%>
+            <% @user.errors.full_messages.each do |message| %>
               <li class="form-error-message"><%= message %></li>
             <% end %>
           </ul>
@@ -44,6 +44,12 @@
       <div class="form-field">
         <%= f.label :password_confirmation, class: 'form-label' %>
         <%= f.password_field :password_confirmation, class: 'form-text-field' %>
+      </div>
+
+      <div class="form-field">
+        <%= link_to 'Удалить мой аккаунт', user_path(@user.id),
+                    method: :delete, data: { confirm: 'Вы хорошо подумали? Обратного пути нет' },
+                    class: 'button button-red button-small' %>
       </div>
 
       <div class="form-action buffer-top">

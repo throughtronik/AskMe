@@ -29,6 +29,12 @@ class UsersController < ApplicationController
   def edit
   end
 
+  def destroy
+    @user.destroy
+    session[:user_id] = nil
+
+    redirect_to root_url, notice: 'До скорых встреч!'
+  end
 
   def show
     @bg_color = @user.bg_color
