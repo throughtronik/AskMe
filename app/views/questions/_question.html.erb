@@ -16,7 +16,7 @@
 
     <div class="question-author">
       <% if question.author.present? %>
-        Задан пользователем <%= link_to "@#{question.author.username}", user_path(question.author.id) %>
+        Задан пользователем <%= link_to "@#{question.author.username}", user_path(question.author) %>
       <% end %>
     </div>
 
