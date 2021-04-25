@@ -1,8 +1,7 @@
-<div class="user-header text-center" <% unless @bg_color.blank? %> style="background: <%=@bg_color %>" <% end %>>
+<div class="user-header text-center"  style="background: <%=@bg_color %>">
   <h1 class="title-medium">
     <%= @user.name %>
   </h1>
-
   <div class="buffer-both">
     <%= link_to 'Редактировать профиль', edit_user_path(@user) if current_user == @user %>
   </div>
