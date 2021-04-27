@@ -37,8 +37,6 @@ class UsersController < ApplicationController
   end
 
   def show
-    @bg_color = ( @user.bg_color || "#005a55" )
-
     @questions = @user.questions.order(created_at: :desc)
 
     @new_question = @user.questions.build
