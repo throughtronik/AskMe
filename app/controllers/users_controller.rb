@@ -18,6 +18,7 @@ class UsersController < ApplicationController
 
   def index
     @users = User.all
+    @hashtags = Hashtag.with_linked_questions
   end
 
   def new

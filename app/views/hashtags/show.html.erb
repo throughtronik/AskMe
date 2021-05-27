@@ -1,0 +1,17 @@
+<div class="content-wrapper buffer-both text-center">
+  <div class="buffer-both">
+    <h1 class="title-medium">Вопросы с хештегом #<%= @hashtag.tag %>:</h1>
+  </div>
+
+  <div class="text-left ">
+    <% @hashtag.questions.each do |question| %>
+      <div class="buffer-bottom">
+        <div>
+          <%= question.text %>
+        </div>
+        Задан пользователен <%= link_to question.author.name, user_path(question.author) %>
+        <%= l(question.created_at, format: :short) %>
+      </div>
+    <% end %>
+  </div>
+</div>

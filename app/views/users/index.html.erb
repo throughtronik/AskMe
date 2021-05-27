@@ -10,4 +10,11 @@
       </div>
     </div>
   <% end %>
+
+  <div class="buffer-top">
+    <h3>Хештеги: </h3>
+    <% @hashtags.each do |hashtag| %>
+      <%= render partial: 'hashtags/hashtag', object: hashtag %>
+    <% end %>
+  </div>
 </div>
