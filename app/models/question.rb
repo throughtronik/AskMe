@@ -6,7 +6,7 @@ class Question < ApplicationRecord
   has_many :hashtag_questions, dependent: :destroy
   has_many :hashtags, through: :hashtag_questions
 
-  validates :text, presence: true, length: { maximum: 255, message: "is more than 255 symbols" }
+  validates :text, presence: true, length: { maximum: 255 }
 
   after_save_commit :scan_and_save_hashtags
   after_update_commit :delete_all_binded_hashtags
