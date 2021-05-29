@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_05_24_130739) do
+ActiveRecord::Schema.define(version: 2021_05_29_182338) do
 
   create_table "hashtag_questions", force: :cascade do |t|
     t.integer "question_id", null: false
