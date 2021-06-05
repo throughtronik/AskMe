@@ -24,7 +24,6 @@ class User < ApplicationRecord
 
   validates :username, format: { with: VALID_USERNAME_REGEXP }, length: { maximum: 40 }
 
-
   def self.authenticate(email, password)
     user = find_by(email: email&.downcase)
 
