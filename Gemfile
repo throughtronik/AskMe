@@ -6,16 +6,16 @@ ruby '3.0.0'
 gem 'rails', '~> 6.1.3', '>= 6.1.3.1'
 
 gem 'bootsnap', '>= 1.4.4', require: false
-gem 'jquery-rails'
+gem 'jquery-rails', '~> 4.4.0'
 gem 'pry-rails'
 gem 'puma', '~> 5.0'
 gem 'rails-i18n'
-gem 'recaptcha', require: 'recaptcha/rails'
+gem 'recaptcha', '~> 5.8.0', require: 'recaptcha/rails'
 gem 'webpacker', '~> 5.0'
 
 group :development, :test do
   gem 'byebug', platforms: %i[mri mingw x64_mingw]
-  gem 'dotenv-rails'
+  gem 'dotenv-rails', '~> 2.7.6'
   gem 'rubocop-rails', require: false
   gem 'sqlite3'
 end
@@ -27,7 +27,6 @@ group :development do
 end
 
 group :production do
-  gem 'mailjet'
   gem 'pg', '~> 1.1'
 end
 
