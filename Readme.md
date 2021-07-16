@@ -7,9 +7,9 @@ Quenans
 
 Рабочий вариант: https://quenans.herokuapp.com/
 
-![alt_text](https://i.ibb.co/qF5Lsjx/image.png)
+![alt_text](https://i.ibb.co/tpHN3C0/image.png)
 
-![alt_text](https://i.ibb.co/FmcM7PB/image.png)
+![alt_text](https://i.ibb.co/4KRw2XX/image.png)
 
 Требования
 ----------------------------------
