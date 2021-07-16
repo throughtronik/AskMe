@@ -19,11 +19,11 @@ class Question < ApplicationRecord
 
   def scan_and_save_hashtags
     "#{text} #{answer}".scan(Hashtag::HASHTAG_REGEX)
-        .map(&:downcase)
-        .uniq
-        .each do | hashtag |
-          new_hashtag = Hashtag.find_or_create_by(tag: hashtag.delete("#"))
-          HashtagQuestion.create!(question: self, hashtag: new_hashtag)
+                       .map(&:downcase)
+                       .uniq
+                       .each do |hashtag|
+      new_hashtag = Hashtag.find_or_create_by(tag: hashtag.delete('#'))
+      HashtagQuestion.create!(question: self, hashtag: new_hashtag)
     end
   end
 end

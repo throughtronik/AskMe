@@ -8,6 +8,6 @@ module ApplicationHelper
   end
 
   def user_bg_color(user)
-    user.bg_color || "#005a55"
+    user.bg_color || '#005a55'
   end
 end

@@ -1,7 +1,6 @@
 class UsersController < ApplicationController
-
-  before_action :load_user, except: [:create, :index, :new]
-  before_action :authorize_user, except: [:create, :index, :new, :show]
+  before_action :load_user, except: %i[create index new]
+  before_action :authorize_user, except: %i[create index new show]
 
   def create
     redirect_to root_url, alert: 'Уже залогинены' if current_user.present?
@@ -27,8 +26,7 @@ class UsersController < ApplicationController
     @user = User.new
   end
 
-  def edit
-  end
+  def edit; end
 
   def destroy
     @user.destroy

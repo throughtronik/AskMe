@@ -1,9 +1,8 @@
 class QuestionsController < ApplicationController
-  before_action :load_question, only: [:edit, :update, :destroy]
+  before_action :load_question, only: %i[edit update destroy]
   before_action :authorize_user, except: [:create]
 
-  def edit
-  end
+  def edit; end
 
   def create
     @question = Question.new(question_params)
@@ -56,4 +55,3 @@ class QuestionsController < ApplicationController
     end
   end
 end
-

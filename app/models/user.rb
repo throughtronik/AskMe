@@ -1,10 +1,10 @@
 require 'openssl'
 
 class User < ApplicationRecord
-  ITERATIONS = 20000.freeze
-  DIGEST = OpenSSL::Digest::SHA256.new
-  VALID_USERNAME_REGEXP = /\A\w+\z/.freeze
-  VALID_BG_COLOR_REGEXP = /\A#([a-f0-9]){6}\z/.freeze
+  ITERATIONS = 20_000
+  DIGEST = OpenSSL::Digest.new('SHA256')
+  VALID_USERNAME_REGEXP = /\A\w+\z/
+  VALID_BG_COLOR_REGEXP = /\A#([a-f0-9]){6}\z/
 
   before_validation :username_downcase, :email_downcase
 
@@ -41,7 +41,7 @@ class User < ApplicationRecord
   end
 
   def self.hash_to_string(password_hash)
-    password_hash.unpack('H*')[0]
+    password_hash.unpack1('H*')
   end
 
   private
@@ -51,20 +51,16 @@ class User < ApplicationRecord
       self.password_salt = User.hash_to_string(OpenSSL::Random.random_bytes(16))
 
       self.password_hash = User.hash_to_string(
-        OpenSSL::PKCS5.pbkdf2_hmac(password, self.password_salt, ITERATIONS, DIGEST.length, DIGEST)
+        OpenSSL::PKCS5.pbkdf2_hmac(password, password_salt, ITERATIONS, DIGEST.length, DIGEST)
       )
     end
   end
 
   def email_downcase
-    if email.present?
-      email.downcase!
-    end
+    email.downcase! if email.present?
   end
 
   def username_downcase
-    if username.present?
-      username.downcase!
-    end
+    username.downcase! if username.present?
   end
 end

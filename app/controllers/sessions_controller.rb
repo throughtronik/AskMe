@@ -1,6 +1,5 @@
 class SessionsController < ApplicationController
-  def new
-  end
+  def new; end
 
   def create
     user = User.authenticate(params[:email], params[:password])
@@ -16,6 +15,6 @@ class SessionsController < ApplicationController
 
   def destroy
     session[:user_id] = nil
-    redirect_to root_url, notice: "Камбек, сун!"
+    redirect_to root_url, notice: 'Камбек, сун!'
   end
 end
